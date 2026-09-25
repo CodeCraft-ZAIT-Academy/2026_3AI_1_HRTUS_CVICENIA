@@ -11,9 +11,14 @@ import { Book } from '../book';
 export class BookCard {
   book = input.required<Book>();
   showDetails: boolean = false;
-  
+  favorite: boolean = false;
+
   toggleDetails(): void {
   this.showDetails = !this.showDetails;
+}
+
+  toggleFavorite(): void {
+    this.favorite = !this.favorite;
 }
 }
 

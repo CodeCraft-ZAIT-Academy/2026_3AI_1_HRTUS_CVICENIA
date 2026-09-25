@@ -28,7 +28,26 @@
   cursor: pointer;
 }
 
-.book-card button:hover {
+.book-card .favorite_button {
+  margin-top: 12px;
+  margin-right: 8px;
+  padding: 8px 14px;
+  border: none;
+  border-radius: 8px;
+  background-color: #858585;
+  color: white;
+  cursor: pointer;
+}
+
+.book-card .favorite_button:hover,  .book-card button:hover{
+  background-color: #1d4ed8;
+}
+
+.book-card .favorite_button.favorite-active {
+  background-color: #ff0101;
+}
+
+.book-card .favorite_button.favorite-active:hover {
   background-color: #1d4ed8;
 }
 

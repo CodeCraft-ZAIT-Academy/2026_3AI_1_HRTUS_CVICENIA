@@ -16,7 +16,6 @@
   </div>
 }
 
-
 <button (click)="toggleDetails()">
   Zobraziť / skryť detail
 </button>
@@ -25,6 +24,13 @@
   Vypožičať
 </button>
 
+<button
+  class="favorite_button"
+  [class.favorite-active]="favorite"
+  (click)="toggleFavorite()"
+>
+  Obľúbené
+</button>
 
 </article>
 

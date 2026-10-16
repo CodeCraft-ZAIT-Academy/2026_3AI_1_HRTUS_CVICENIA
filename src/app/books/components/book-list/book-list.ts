@@ -26,10 +26,10 @@ import { BookService } from '../../book.service';
     MatFormFieldModule,
     MatInputModule,
     MatSelectModule,
-    MatButtonToggleModule
+    MatButtonToggleModule,
   ],
   templateUrl: './book-list.html',
-  styleUrl: './book-list.css'
+  styleUrl: './book-list.css',
 })
 export class BookList {
   private bookService = inject(BookService);
@@ -45,31 +45,7 @@ export class BookList {
   sortBy: string = 'none';
 
   visibleBooks(): Book[] {
-    const text = this.searchText.trim().toLowerCase();
-
-    let result = this.books.filter(book =>
-      book.title.toLowerCase().includes(text) || book.author.toLowerCase().includes(text)
-    );
-
-    if (this.availability === 'available') {
-      result = result.filter(book => book.available);
-    } else if (this.availability === 'borrowed') {
-      result = result.filter(book => !book.available);
-    }
-
-    switch (this.sortBy) {
-      case 'title':
-        result = [...result].sort((a, b) => a.title.localeCompare(b.title));
-        break;
-      case 'year':
-        result = [...result].sort((a, b) => b.year - a.year);
-        break;
-      case 'rating':
-        result = [...result].sort((a, b) => b.rating - a.rating);
-        break;
-    }
-
-    return result;
+    return this.bookService.getFilteredBooks(this.searchText, this.availability, this.sortBy);
   }
 
   clearSearch(): void {
@@ -100,7 +76,7 @@ export class BookList {
 
   borrow(book: Book): void {
     if (!this.bookService.borrowBook(book.id)) {
-      alert(`Naraz môžeš mať požičaných najviac ${this.maxBorrowed} kníh. Najskôr nejakú vráť.`);
+      alert('Knihu teraz nie je možné vypožičať. Skontroluj dostupnosť a limit výpožičiek.');
       return;
     }
     this.refreshBooks();

@@ -76,8 +76,10 @@
         (borrowed)="borrow(book)"
         (returned)="giveBack(book)"
         (edited)="updateBook($event)"
-        (deleted)="deleteBook(book)">
-      </app-book-card>
+        (deleted)="deleteBook(book)"
+        (favoriteToggled)="toggleFavorite(book)">
+        </app-book-card>
+      
     }
   } @empty {
     @if (books.length === 0) {

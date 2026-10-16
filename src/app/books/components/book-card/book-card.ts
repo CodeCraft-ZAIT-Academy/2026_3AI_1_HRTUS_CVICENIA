@@ -16,6 +16,7 @@ export class BookCard {
   book = input.required<Book>();
   borrowed = output<void>();
   returned = output<void>();
+  favoriteToggled = output<void>();
 
   showDetails: boolean = false;
 
@@ -24,7 +25,7 @@ export class BookCard {
   }
 
   toggleFavorite(): void {
-    this.book().favorite = !this.book().favorite;
+    this.favoriteToggled.emit();
   }
   genreColor(): string {
     switch (this.book().genre) {
@@ -55,7 +56,7 @@ export class BookCard {
     this.returned.emit();
   }
 
-   edited = output<Book>();
+  edited = output<Book>();
 
   editing: boolean = false;
 

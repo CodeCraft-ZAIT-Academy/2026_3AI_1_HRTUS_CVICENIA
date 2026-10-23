@@ -134,4 +134,9 @@ export class BookList {
     this.sortBy.set('none');
     this.firstPage();
   }
+
+  readonly pagedBooks = computed(() => {
+  const start = (this.currentPage() - 1) * this.pageSize();
+  return this.visibleBooks().slice(start, start + this.pageSize());
+  });
 }

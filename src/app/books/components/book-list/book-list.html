@@ -32,7 +32,6 @@
     <mat-form-field class="search">
       <mat-label>Hľadať podľa názvu alebo autora</mat-label>
       <mat-icon matPrefix>search</mat-icon>
-      <input matInput name="search" [(ngModel)]="searchText" (ngModelChange)="firstPage()" />
       <input
         matInput
         name="search"
@@ -54,12 +53,11 @@
       <mat-button-toggle value="all">Všetky</mat-button-toggle>
       <mat-button-toggle value="available">Dostupné</mat-button-toggle>
       <mat-button-toggle value="borrowed">Vypožičané</mat-button-toggle>
-      
     </mat-button-toggle-group>
-    
+
     <button (click)="favoritesOnly.update((v) => !v)">
-        {{ favoritesOnly() ? 'Všetky' : 'Iba obľúbené' }}
-      </button>
+      {{ favoritesOnly() ? 'Všetky' : 'Iba obľúbené' }}
+    </button>
 
     <mat-form-field>
       <mat-label>Zoradiť podľa</mat-label>
@@ -92,18 +90,16 @@
     }
   </div>
 
-  @for (book of visibleBooks(); track book.id; let i = $index) {
-    @if (isOnCurrentPage(i)) {
-      <app-book-card
-        [book]="book"
-        (borrowed)="borrow(book)"
-        (returned)="giveBack(book)"
-        (edited)="updateBook($event)"
-        (deleted)="deleteBook(book)"
-        (favoriteToggled)="toggleFavorite(book)"
-      >
-      </app-book-card>
-    }
+  @for (book of pagedBooks(); track book.id) {
+    <app-book-card
+      [book]="book"
+      (borrowed)="borrow(book)"
+      (returned)="giveBack(book)"
+      (edited)="updateBook($event)"
+      (deleted)="deleteBook(book)"
+      (favoriteToggled)="toggleFavorite(book)"
+    >
+    </app-book-card>
   } @empty {
     @if (books().length === 0) {
       <p class="empty">V knižnici zatiaľ nie sú žiadne knihy.</p>

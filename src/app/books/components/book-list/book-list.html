@@ -54,7 +54,12 @@
       <mat-button-toggle value="all">Všetky</mat-button-toggle>
       <mat-button-toggle value="available">Dostupné</mat-button-toggle>
       <mat-button-toggle value="borrowed">Vypožičané</mat-button-toggle>
+      
     </mat-button-toggle-group>
+    
+    <button (click)="favoritesOnly.update((v) => !v)">
+        {{ favoritesOnly() ? 'Všetky' : 'Iba obľúbené' }}
+      </button>
 
     <mat-form-field>
       <mat-label>Zoradiť podľa</mat-label>
@@ -72,7 +77,10 @@
   </div>
 
   @if (visibleBooks().length > 0) {
-    <p>Zobrazené knihy {{ firstShown() }} – {{ lastShown() }} z {{ visibleBooks().length }}</p>
+    <p>
+      Zobrazené knihy {{ firstShown() }} – {{ lastShown() }} z {{ visibleBooks().length }} |
+      Všetkých kníh: {{ totalBooks() }} | Dostupných: {{ availableBooks().length }}
+    </p>
   }
 
   <div class="page-size">

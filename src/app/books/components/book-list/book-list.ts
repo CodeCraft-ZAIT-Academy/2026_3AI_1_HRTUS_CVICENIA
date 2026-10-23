@@ -41,9 +41,15 @@ export class BookList {
   readonly availability = signal('all');
   readonly sortBy = signal('none');
 
-  visibleBooks(): Book[] {
-    return this.bookService.getFilteredBooks(this.searchText(), this.availability(), this.sortBy());
-  }
+  readonly favoritesOnly = signal(false);
+  readonly visibleBooks = computed(() => {
+    const list = this.bookService.getFilteredBooks(
+      this.searchText(),
+      this.availability(),
+      this.sortBy(),
+    );
+    return this.favoritesOnly() ? list.filter((b) => b.favorite) : list;
+  });
 
   clearSearch(): void {
     this.searchText.set('');
@@ -117,4 +123,15 @@ export class BookList {
   );
 
   readonly pages = computed(() => Array.from({ length: this.pageCount() }, (_, i) => i + 1));
+
+  readonly totalBooks = computed(() => this.books().length);
+
+  readonly availableBooks = this.bookService.availableBooks;
+
+  resetFilters(): void {
+    this.searchText.set('');
+    this.availability.set('all');
+    this.sortBy.set('none');
+    this.firstPage();
+  }
 }

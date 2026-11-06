@@ -1,0 +1,18 @@
+<a matButton routerLink="/books">← Späť na zoznam</a>
+
+@if (book(); as book) {
+  <h1>{{ book.title }}</h1>
+  <p>Autor: {{ book.author }}</p>
+  <p>Stav: {{ book.available ? 'Požičaná' : 'Dostupná' }}</p>
+
+  <app-book-detail [book]="book" />
+
+  @if (book.available) {
+    <button matButton (click)="giveBack(book.id)">Vrátiť</button>
+  } @else {
+    <button matButton (click)="borrow(book.id)">Vypožičať</button>
+  }
+  <button matButton (click)="toggleFavorite(book.id)">Obľúbené</button>
+} @else {
+  <p>Kniha s číslom {{ id() }} v knižnici neexistuje.</p>
+}

@@ -15,12 +15,12 @@ import { getGenreColor } from '../../genre-colors';
 export class BookCard {
   book = input.required<Book>();
   borrowed = output<void>();
-  returned = output<void>();
   favoriteToggled = output<void>();
 
   readonly showDetails = signal(false);
   readonly editing = signal(false);
   readonly confirmingDelete = signal(false);
+  
 
   toggleDetails(): void {
     this.showDetails.update((open) => !open);
@@ -35,10 +35,6 @@ export class BookCard {
 
   borrow(): void {
     this.borrowed.emit();
-  }
-
-  giveBack(): void {
-    this.returned.emit();
   }
 
   edited = output<Book>();

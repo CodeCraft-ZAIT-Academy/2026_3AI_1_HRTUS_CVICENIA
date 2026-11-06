@@ -8,8 +8,6 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { FormsModule } from '@angular/forms';
 import { BookCard } from '../book-card/book-card';
-import { BookForm } from '../book-form/book-form';
-import { Cart } from '../../../cart/components/cart';
 import { Book } from '../../book';
 import { BookService } from '../../book.service';
 
@@ -17,8 +15,6 @@ import { BookService } from '../../book.service';
   selector: 'app-book-list',
   imports: [
     BookCard,
-    BookForm,
-    Cart,
     FormsModule,
     MatButtonModule,
     MatIconModule,
@@ -34,8 +30,7 @@ import { BookService } from '../../book.service';
 export class BookList {
   private bookService = inject(BookService);
   readonly books = this.bookService.books;
-  readonly borrowedBooks = this.bookService.borrowedBooks;
-  readonly maxBorrowed = this.bookService.maxBorrowed;
+  
 
   readonly searchText = signal('');
   readonly availability = signal('all');
@@ -77,9 +72,7 @@ export class BookList {
     }
   }
 
-  giveBack(book: Book): void {
-    this.bookService.returnBook(book.id);
-  }
+  
 
   toggleFavorite(book: Book): void {
     this.bookService.toggleFavorite(book.id);

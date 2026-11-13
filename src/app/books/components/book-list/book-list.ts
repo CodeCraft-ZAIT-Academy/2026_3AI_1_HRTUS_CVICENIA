@@ -10,11 +10,13 @@ import { FormsModule } from '@angular/forms';
 import { BookCard } from '../book-card/book-card';
 import { Book } from '../../book';
 import { BookService } from '../../book.service';
+import { ServerBookList } from '../server-book-list/server-book-list';
 
 @Component({
   selector: 'app-book-list',
   imports: [
     BookCard,
+    ServerBookList,
     FormsModule,
     MatButtonModule,
     MatIconModule,

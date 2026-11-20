@@ -1,9 +1,13 @@
-@if (!isEditMode()) {
-  <h1>Nová kniha</h1>
-  <app-book-form (saved)="save($event)" (cancelled)="cancel()" />
-} @else if (book()) {
-  <h1>Úprava knihy</h1>
-  <app-book-form [book]="book()" (saved)="save($event)" (cancelled)="cancel()" />
-} @else {
-  <p>Kniha s číslom {{ id() }} v knižnici neexistuje.</p>
-}
+@if (loading()) {
+    <p role="status">Načítavam knihy…</p>
+  } @else if (loadError()) {
+    <p role="alert">{{ loadError() }}</p>
+  } @else if (!isEditMode()) {
+    <h1>Nová kniha</h1>
+    <app-book-form (saved)="save($event)" />
+  } @else if (book()) {
+    <h1>Úprava knihy</h1>
+    <app-book-form [book]="book()" (saved)="save($event)" (cancelled)="cancel()" />
+  } @else {
+    <p class="empty">Kniha s číslom {{ id() }} v knižnici neexistuje.</p>
+  }

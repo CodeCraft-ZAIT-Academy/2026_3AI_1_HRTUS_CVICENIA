@@ -17,6 +17,9 @@ export class AdminBooks {
   readonly books = this.bookService.books;
   readonly confirmingDeleteId = signal<number | undefined>(undefined);
 
+  readonly loading = this.bookService.loading;
+  readonly loadError = this.bookService.loadError;
+
   askDelete(book: Book) {
     this.confirmingDeleteId.set(book.id);
   }

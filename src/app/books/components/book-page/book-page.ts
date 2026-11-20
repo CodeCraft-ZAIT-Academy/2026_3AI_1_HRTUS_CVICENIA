@@ -19,6 +19,9 @@ export class BookPage {
     this.bookService.getBookById(Number(this.id()))
   );
 
+  readonly loading = this.bookService.loading;
+  readonly loadError = this.bookService.loadError;
+
   borrow(id: number) { this.bookService.borrowBook(id); }       
   giveBack(id: number) { this.bookService.returnBook(id); }
   toggleFavorite(id: number) { this.bookService.toggleFavorite(id); }

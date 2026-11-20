@@ -21,6 +21,9 @@ export class AdminBookEdit {
     this.bookService.getBookById(Number(this.id()))
   );
 
+  readonly loading = this.bookService.loading;
+  readonly loadError = this.bookService.loadError;
+
   save(book: Book): void {
     if (this.isEditMode()) {
       this.bookService.updateBook(book);

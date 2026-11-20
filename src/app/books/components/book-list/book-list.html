@@ -1,5 +1,9 @@
 <section>
-  
+  <p class="stats">
+    Všetkých kníh: {{ totalBooks() }} · Dostupných:
+    {{ (books() | bookFilter: '' : 'available').length }} · Obľúbených:
+    {{ (books() | bookFilter: '' : 'all' : true).length }}
+  </p>
   <h2>Zoznam kníh</h2>
 
   <div class="toolbar">
@@ -84,7 +88,6 @@
       <p class="empty">Nenašli sa žiadne knihy. Skús zmeniť hľadanie alebo filter.</p>
     }
   }
-  
 
   <div class="pagination">
     <button matIconButton (click)="firstPage()" [disabled]="currentPage() === 1">
